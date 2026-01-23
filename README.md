@@ -12,10 +12,8 @@ The application is containerized and can be run locally using Docker or deployed
 
 ## Architecture
 
-Frontend (React + Nginx)  
-⬇
-Backend (Spring Boot REST API)  
-⬇
+Frontend (React + Nginx)
+Backend (Spring Boot REST API)
 MySQL Database (Docker volume persistence)
 
 ---
@@ -62,6 +60,8 @@ Frontend: http://localhost:3000
 Backend API: http://localhost:8080
 
 MySQL: localhost:3306
+
+---
 
 Images are Available on Docker Hub:
 
