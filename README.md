@@ -13,7 +13,7 @@ The application is containerized and can be run locally using Docker or deployed
 ## Architecture
 
 Frontend (React + Nginx)  
-⬇  
+⬇
 Backend (Spring Boot REST API)  
 ⬇  
 MySQL Database (Docker volume persistence)
