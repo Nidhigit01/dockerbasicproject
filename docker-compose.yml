@@ -8,13 +8,24 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: userdb
-    ports:
-      - "3306:3306"
+    expose:
+      - "3306"
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
     volumes:
       - mysql_data:/var/lib/mysql
+    networks:
+      - app-network
   backend:
     build: ./backend
     container_name: user-backend
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges: true
+    read_only: true
     restart: always
     depends_on: 
       - mysql
@@ -24,11 +35,28 @@ services:
       SPRING_DATASOURCE_PASSWORD: root
     ports:
       - "8080:8080"
+    networks:
+      - app-network
+    volumes:
+      - ./backend/logs:/app/logs
   frontend:
     build: ./frontend
     container_name: user-frontend
     restart: always
     ports:
       - "3000:80"
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    networks:
+      - app-network
+    volumes:
+      - ./frontend/nginx:/etc/nginx/conf.d:ro
+
 volumes:
   mysql_data:
+networks:
+  app-network:
+    driver: bridge

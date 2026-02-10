@@ -23,6 +23,8 @@ public class UserController {
         this.repo = repo;
     }
 
+    // Handles user-related REST API operations
+    
     @PostMapping
     public User addUser(@RequestBody User user){
         return repo.save(user);
